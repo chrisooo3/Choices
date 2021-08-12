@@ -1,4 +1,4 @@
-/*! choices.js v9.0.1 | © 2019 Josh Johnson | https://github.com/jshjohnson/Choices#readme */
+/*! choices.js v9.0.1 | © 2021 Josh Johnson | https://github.com/jshjohnson/Choices#readme */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1490,7 +1490,7 @@ function () {
           selected: !!option.selected,
           disabled: option.disabled || option.parentNode.disabled,
           placeholder: option.value === '' || option.hasAttribute('placeholder'),
-          customProperties: option.dataset['custom-properties']
+          customProperties: option.dataset['customProperties']
         });
       });
     }
@@ -1639,7 +1639,8 @@ function () {
         _b = item.value,
         value = _b === void 0 ? '' : _b,
         _c = item.label,
-        label = _c === void 0 ? '' : _c;
+        label = _c === void 0 ? '' : _c,
+        customProperties = item.customProperties;
     var group = groupId >= 0 ? this._store.getGroupById(groupId) : null;
 
     this._store.dispatch(items_1.highlightItem(id, true));
@@ -1649,7 +1650,8 @@ function () {
         id: id,
         value: value,
         label: label,
-        groupValue: group && group.value ? group.value : null
+        groupValue: group && group.value ? group.value : null,
+        customProperties: customProperties
       });
     }
 
@@ -3577,7 +3579,7 @@ function () {
   };
 
   Choices.prototype._generatePlaceholderValue = function () {
-    if (this._isSelectElement) {
+    if (this._isSelectElement && this.passedElement.placeholderOption) {
       var placeholderOption = this.passedElement.placeholderOption;
       return placeholderOption ? placeholderOption.text : null;
     }

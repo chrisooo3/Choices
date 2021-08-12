@@ -255,7 +255,7 @@ class Choices {
           disabled: option.disabled || option.parentNode.disabled,
           placeholder:
             option.value === '' || option.hasAttribute('placeholder'),
-          customProperties: option.dataset['custom-properties'],
+          customProperties: option.dataset['customProperties'],
         });
       });
     }
@@ -378,7 +378,7 @@ class Choices {
       return this;
     }
 
-    const { id, groupId = -1, value = '', label = '' } = item;
+    const { id, groupId = -1, value = '', label = '', customProperties } = item;
     const group = groupId >= 0 ? this._store.getGroupById(groupId) : null;
 
     this._store.dispatch(highlightItem(id, true));
@@ -389,6 +389,7 @@ class Choices {
         value,
         label,
         groupValue: group && group.value ? group.value : null,
+        customProperties,
       });
     }
 
